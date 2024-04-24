@@ -63,9 +63,47 @@ for %%f in ("%SourceFolder%\*") do (
     ) else if "%%~xf"==".bat" (
         if not exist "%DestinationFolder%\Batch" mkdir "%DestinationFolder%\Batch"
         move "%%f" "%DestinationFolder%\Batch"
+    ) else if "%%~xf"==".epub" (
+        if not exist "%DestinationFolder%\Jw" mkdir "%DestinationFolder%\Jw"
+        move "%%f" "%DestinationFolder%\Jw"
+    ) else if "%%~xf"==".jwpub" (
+        if not exist "%DestinationFolder%\Jw" mkdir "%DestinationFolder%\Jw"
+        move "%%f" "%DestinationFolder%\Jw"
     ) else (
         :: Quand l'extention n'est pas dans la list va crée un fichier sous le nom de l'extention dans un fichier "Autre"
         if not exist "%DestinationFolder%\Autre\%%~xf" mkdir "%DestinationFolder%\Autre\%%~xf"
         move "%%f" "%DestinationFolder%\Autre\%%~xf"
+    )
+)
+for /d %%d in ("%SourceFolder%\*") do (
+    :: Traiter le dossier %%d
+    :: Vérifier si c'est un dossier
+    if "%%~xd" == "" (
+        :: Vérifier si "Autre\Dossier" existe, sinon le créer
+        if not exist "%DestinationFolder%\Autre\Dossier" mkdir "%DestinationFolder%\Autre\Dossier"
+        :: Vérifier si %%d n'est pas un des dossiers déjà créés par le programme
+        if not "%%d" == "%DestinationFolder%\Word" (
+            if not "%%d" == "%DestinationFolder%\Excel" (
+                if not "%%d" == "%DestinationFolder%\Pdf" (
+                    if not "%%d" == "%DestinationFolder%\Archive ZIP ou RAR" (
+                        if not "%%d" == "%DestinationFolder%\Powerpoint" (
+                            if not "%%d" == "%DestinationFolder%\Executables" (
+                                if not "%%d" == "%DestinationFolder%\Multimedia" (
+                                    if not "%%d" == "%DestinationFolder%\Image" (
+                                        if not "%%d" == "%DestinationFolder%\Texte" (
+                                            if not "%%d" == "%DestinationFolder%\Batch" (
+                                                if not "%%d" == "%DestinationFolder%\Jw" (
+                                                    move "%%d" "%DestinationFolder%\Autre\Dossier"
+                                                )
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        )
     )
 )
