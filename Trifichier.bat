@@ -80,7 +80,7 @@ for /d %%d in ("%SourceFolder%\*") do (
     :: Vérifier si c'est un dossier
     if "%%~xd" == "" (
         :: Vérifier si "Autre\Dossier" existe, sinon le créer
-        if not exist "%DestinationFolder%\Autre\Dossier" mkdir "%DestinationFolder%\Autre\Dossier"
+        if not exist "%DestinationFolder%\Dossier" mkdir "%DestinationFolder%\Dossier"
         :: Vérifier si %%d n'est pas un des dossiers déjà créés par le programme
         if not "%%d" == "%DestinationFolder%\Word" (
             if not "%%d" == "%DestinationFolder%\Excel" (
@@ -93,7 +93,13 @@ for /d %%d in ("%SourceFolder%\*") do (
                                         if not "%%d" == "%DestinationFolder%\Texte" (
                                             if not "%%d" == "%DestinationFolder%\Batch" (
                                                 if not "%%d" == "%DestinationFolder%\Jw" (
-                                                    move "%%d" "%DestinationFolder%\Autre\Dossier"
+                                                    if not "%%d" == "%DestinationFolder%\Autre" (
+                                                        if not "%%d" == "%DestinationFolder%\Dossier" (
+                                                    move "%%d" "%DestinationFolder%\Dossier"
+                                                        )
+                                                        
+                                                    )
+                                                    
                                                 )
                                             )
                                         )
