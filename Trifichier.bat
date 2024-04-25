@@ -79,7 +79,7 @@ for /d %%d in ("%SourceFolder%\*") do (
     :: Traiter le dossier %%d
     :: Vérifier si c'est un dossier
     if "%%~xd" == "" (
-        :: Vérifier si "Autre\Dossier" existe, sinon le créer
+        :: Vérifier si "Dossier" existe, sinon le créer
         if not exist "%DestinationFolder%\Dossier" mkdir "%DestinationFolder%\Dossier"
         :: Vérifier si %%d n'est pas un des dossiers déjà créés par le programme
         if not "%%d" == "%DestinationFolder%\Word" (
